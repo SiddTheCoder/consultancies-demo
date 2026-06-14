@@ -11,6 +11,9 @@ import {
   Award,
   Users,
   CheckCircle,
+  BookOpenCheck,
+  Headphones,
+  PenLine,
   Menu,
   X,
 } from "lucide-react";
@@ -99,6 +102,108 @@ const countries = [
     img_url: "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_ae4ac1a962_4116a40d8bf795cf.png",
     span: "col-span-1 row-span-1",
   },
+  {
+    name: "United States",
+    tag: "Research Powerhouse",
+    facts: ["Ivy League Pathways", "STEM OPT Options", "4,000+ Institutions"],
+    img_url: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80",
+    span: "sm:col-span-2 lg:col-span-1",
+  },
+  {
+    name: "New Zealand",
+    tag: "Safe Study Living",
+    facts: ["Post-Study Work Visa", "High Student Satisfaction", "PR-Friendly Skills List"],
+    img_url: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=80",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    name: "Ireland",
+    tag: "Europe Tech Gateway",
+    facts: ["2-Year Stay Back Visa", "English-Taught Degrees", "Tech Employer Access"],
+    img_url: "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?auto=format&fit=crop&w=1200&q=80",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    name: "France",
+    tag: "Culture & Business",
+    facts: ["Low Public Tuition", "Top Business Schools", "Schengen Career Access"],
+    img_url: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80",
+    span: "sm:col-span-2 lg:col-span-2",
+  },
+  {
+    name: "Netherlands",
+    tag: "English-Taught Europe",
+    facts: ["2,000+ English Programs", "Orientation Year Visa", "Innovation Hubs"],
+    img_url: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=1200&q=80",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    name: "Dubai",
+    tag: "Global Campus Hub",
+    facts: ["Branch Campuses", "Fast Visa Processing", "Business Career Access"],
+    img_url: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
+    span: "col-span-1 row-span-1",
+  },
+];
+
+const studyTests = [
+  {
+    name: "IELTS",
+    score: "Band 7+ target",
+    format: "Academic and General Training",
+    desc: "Structured reading, writing, listening, and speaking prep with weekly mock tests and band-wise feedback.",
+    highlights: ["Speaking interview practice", "Writing Task 1 and 2 reviews", "British Council format drills"],
+    icon: BookOpenCheck,
+  },
+  {
+    name: "TOEFL",
+    score: "95+ score target",
+    format: "TOEFL iBT",
+    desc: "Integrated-skills coaching for students applying to US, Canadian, and global universities.",
+    highlights: ["Listening note strategy", "Integrated writing practice", "Timed computer-based mocks"],
+    icon: Headphones,
+  },
+  {
+    name: "PTE",
+    score: "65+ score target",
+    format: "PTE Academic",
+    desc: "Fast-track AI-scored test preparation focused on fluency, pronunciation, and repeatable scoring patterns.",
+    highlights: ["Speaking fluency drills", "Template-based writing prep", "Score improvement tracker"],
+    icon: PenLine,
+  },
+];
+
+const heroSlides = [
+  {
+    image: "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_03c99d230f_0dad01d329a9030b.png",
+    alt: "Modern university campus with students walking through glass buildings",
+    topStat: { value: "150+", label: "Partner Universities" },
+    bottomStat: { value: "98%", label: "Visa Success Rate" },
+  },
+  {
+    image: "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_8289d3d549_0d786d24f2db6c39.png",
+    alt: "Australia study destination campus and city view",
+    topStat: { value: "12", label: "Study Destinations" },
+    bottomStat: { value: "5,000+", label: "Students Guided" },
+  },
+  {
+    image: "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_452eca6a57_946a7e6c915824ea.png",
+    alt: "United Kingdom university architecture study destination",
+    topStat: { value: "IELTS", label: "TOEFL and PTE Prep" },
+    bottomStat: { value: "7+", label: "Band Target Support" },
+  },
+  {
+    image: "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_cc24a4791d_81dba8adabe876c6.png",
+    alt: "Japan city and university study destination",
+    topStat: { value: "MEXT", label: "Scholarship Guidance" },
+    bottomStat: { value: "30+", label: "Top QS Options" },
+  },
+  {
+    image: "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_3befe0a6d0_73503e4ccd5c9a01.png",
+    alt: "Canada campus and city study destination",
+    topStat: { value: "PR", label: "Pathway Planning" },
+    bottomStat: { value: "Co-op", label: "Program Support" },
+  },
 ];
 
 const processSteps = [
@@ -122,7 +227,7 @@ const testimonials = [
 ];
 
 const faqs = [
-  { q: "What countries do you provide consultation for?", a: "We specialize in 6 major study destinations: Japan, Australia, Canada, United Kingdom, South Korea, and Germany — covering Asia-Pacific, Europe, and North America with dedicated country specialists for each." },
+  { q: "What countries do you provide consultation for?", a: "We support 12 major study destinations across Asia-Pacific, Europe, North America, and the Middle East, with dedicated guidance for each country pathway." },
   { q: "How long does the application process take?", a: "Typically 3–6 months from initial consultation to visa grant, depending on the country and intake. We recommend starting at least 8 months before your intended start date." },
   { q: "Do you guarantee university admission?", a: "While no consultant can guarantee admission, our 98% visa success rate and strategic shortlisting methodology ensures optimal placement probability based on your profile." },
   { q: "What is included in the consultation fee?", a: "Our comprehensive package includes university shortlisting, SOP/LOR editing (up to 3 rounds), document checklist, visa application support, mock interview prep, and pre-departure orientation." },
@@ -132,6 +237,7 @@ const faqs = [
 
 const navLinks = [
   { label: "Countries", href: "#countries" },
+  { label: "Study", href: "#study" },
   { label: "Process", href: "#process" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "FAQ", href: "#faq" },
@@ -255,9 +361,11 @@ export default function Index() {
   const [activeSection, setActiveSection] = useState("hero");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [activeStep, setActiveStep] = useState(0);
+  const [heroSlideIndex, setHeroSlideIndex] = useState(0);
 
   const metricsRef = useInView(0.4);
   const countriesRef = useInView(0.1);
+  const studyRef = useInView(0.2);
   const processRef = useInView(0.2);
   const faqRef = useInView(0.1);
   const contactRef = useInView(0.2);
@@ -265,17 +373,24 @@ export default function Index() {
   const visa = useCounter(98, 1200, metricsRef.inView);
   const alumni = useCounter(5000, 1400, metricsRef.inView);
   const universities = useCounter(150, 1000, metricsRef.inView);
+  const heroSlide = heroSlides[heroSlideIndex];
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setHeroSlideIndex((current) => (current + 1) % heroSlides.length);
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
 
   // Sticky nav active section detection
   useEffect(() => {
-    const sections = ["hero", "countries", "process", "testimonials", "faq", "contact"];
+    const sections = ["hero", "countries", "study", "process", "testimonials", "faq", "contact"];
     const handleScroll = () => {
       const scrollY = window.scrollY + 100;
-      for (const id of sections.reverse()) {
+      for (const id of [...sections].reverse()) {
         const el = document.getElementById(id);
         if (el && el.offsetTop <= scrollY) { setActiveSection(id); break; }
       }
-      sections.reverse();
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -387,14 +502,14 @@ export default function Index() {
               Trusted by 5,000+ Students Worldwide
             </div>
 
-            <h1 className="font-syne font-extrabold leading-[1.08] tracking-tight text-white" style={{ fontSize: "clamp(2.4rem, 5vw, 4.5rem)" }}>
+            <h1 className="font-jakarta font-extrabold leading-[1.08] text-white" style={{ fontSize: "clamp(2.4rem, 5vw, 4.5rem)", letterSpacing: 0 }}>
               Your Dream<br />
               University.<br />
               <span style={{ color: "#d9a441" }}>Our Expertise.</span>
             </h1>
 
             <p className="text-base md:text-lg leading-relaxed max-w-lg" style={{ color: "#8fa3b8" }}>
-              Elite Global connects ambitious students to top universities across Japan, Australia, Canada, UK, Korea & Germany — with end-to-end support from profile assessment to visa approval.
+              Elite Global connects ambitious students to top universities across 12 leading destinations, with end-to-end support from profile assessment to visa approval.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -426,24 +541,47 @@ export default function Index() {
           </div>
 
           {/* Right: hero image in geometric container */}
-          <div className="relative flex justify-center lg:justify-end">
+          <div className="group relative flex justify-center lg:justify-end">
             <div className="relative w-full max-w-lg" style={{ clipPath: "polygon(0 0, 92% 0, 100% 8%, 100% 100%, 8% 100%, 0 92%)" }}>
               <div className="aspect-[4/5] overflow-hidden rounded-2xl">
-                <img className="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_03c99d230f_0dad01d329a9030b.png" alt="Premium university campus architecture modern glass buildings students walking aerial view golden ho" />
+                <img
+                  key={heroSlide.image}
+                  className="w-full h-full object-cover animate-hero-image-slide"
+                  src={heroSlide.image}
+                  alt={heroSlide.alt}
+                />
               </div>
               {/* Overlay gradient */}
               <div className="absolute inset-0 rounded-2xl" style={{ background: "linear-gradient(135deg, rgba(16,21,28,0.3) 0%, transparent 60%)" }} />
+              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+                {heroSlides.map((slide, i) => (
+                  <button
+                    key={slide.alt}
+                    onClick={() => setHeroSlideIndex(i)}
+                    aria-label={`Show hero slide ${i + 1}`}
+                    className="h-1.5 rounded-full transition-all duration-300"
+                    style={{
+                      width: heroSlideIndex === i ? "28px" : "8px",
+                      backgroundColor: heroSlideIndex === i ? "#d9a441" : "rgba(255,255,255,0.45)",
+                    }}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Floating stat card */}
-            <div className="absolute -left-4 md:-left-8 bottom-12 px-4 py-3 rounded-xl shadow-2xl hidden sm:block" style={{ backgroundColor: "#1e2a38", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <div className="text-xl font-syne font-bold" style={{ color: "#d9a441" }}>98%</div>
-              <div className="text-xs" style={{ color: "#8fa3b8" }}>Visa Success Rate</div>
+            <div className="absolute -left-4 md:-left-8 bottom-12 hidden sm:block transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-4">
+              <div key={`bottom-${heroSlideIndex}`} className="px-4 py-3 rounded-xl shadow-2xl animate-hero-card-slide" style={{ backgroundColor: "#1e2a38", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <div className="text-xl font-jakarta font-extrabold" style={{ color: "#d9a441", letterSpacing: 0 }}>{heroSlide.bottomStat.value}</div>
+                <div className="text-xs" style={{ color: "#8fa3b8" }}>{heroSlide.bottomStat.label}</div>
+              </div>
             </div>
 
-            <div className="absolute -right-2 top-12 px-4 py-3 rounded-xl shadow-2xl hidden sm:block" style={{ backgroundColor: "#1e2a38", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <div className="text-xl font-syne font-bold" style={{ color: "#d9a441" }}>150+</div>
-              <div className="text-xs" style={{ color: "#8fa3b8" }}>Partner Universities</div>
+            <div className="absolute -right-2 top-12 hidden sm:block transition-transform duration-300 ease-out group-hover:-translate-x-5 group-hover:translate-y-4">
+              <div key={`top-${heroSlideIndex}`} className="px-4 py-3 rounded-xl shadow-2xl animate-hero-card-slide" style={{ backgroundColor: "#1e2a38", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <div className="text-xl font-jakarta font-extrabold" style={{ color: "#d9a441", letterSpacing: 0 }}>{heroSlide.topStat.value}</div>
+                <div className="text-xs" style={{ color: "#8fa3b8" }}>{heroSlide.topStat.label}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -463,7 +601,7 @@ export default function Index() {
             { label: "Partner Universities", value: universities, suffix: "+", icon: GraduationCap },
           ].map((m, i) => (
             <div key={i} className="flex flex-col items-center gap-1 sm:border-r last:border-r-0" style={{ borderColor: "rgba(255,255,255,0.2)" }}>
-              <div className="text-4xl md:text-5xl font-syne font-extrabold text-white tracking-tight">
+              <div className="text-4xl md:text-5xl font-jakarta font-extrabold text-white" style={{ letterSpacing: 0 }}>
                 {m.value.toLocaleString()}{m.suffix}
               </div>
               <div className="text-sm font-medium text-white/75 tracking-wide">{m.label}</div>
@@ -477,7 +615,7 @@ export default function Index() {
         <div ref={countriesRef.ref} className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
           <div className="mb-12 md:mb-16">
             <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#d9a441" }}>Study Destinations</div>
-            <h2 className="font-syne font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">6 World-Class<br />Destinations</h2>
+            <h2 className="font-syne font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">{countries.length} World-Class<br />Destinations</h2>
             <p className="max-w-xl text-base md:text-lg" style={{ color: "#8fa3b8" }}>Each country carefully curated for academic excellence, immigration pathways, and career outcomes.</p>
           </div>
 
@@ -486,9 +624,7 @@ export default function Index() {
             {countries.map((country, i) => (
               <div
                 key={country.name}
-                className={`bento-card relative overflow-hidden rounded-2xl cursor-pointer group ${
-                  i === 0 ? "sm:row-span-2" : ""
-                } ${i === 3 ? "sm:col-span-2 lg:col-span-2" : ""}`}
+                className={`bento-card relative overflow-hidden rounded-2xl cursor-pointer group ${country.span}`}
                 style={{
                   opacity: countriesRef.inView ? 1 : 0,
                   transform: countriesRef.inView ? "translateY(0)" : "translateY(32px)",
@@ -530,6 +666,69 @@ export default function Index() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── STUDY TEST PREP ── */}
+      <section id="study" className="py-20 md:py-28" style={{ backgroundColor: "#0d1219" }}>
+        <div ref={studyRef.ref} className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-start">
+            <div
+              style={{
+                opacity: studyRef.inView ? 1 : 0,
+                transform: studyRef.inView ? "translateY(0)" : "translateY(24px)",
+                transition: "opacity 0.6s ease, transform 0.6s ease",
+              }}
+            >
+              <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#d9a441" }}>Study Test Prep</div>
+              <h2 className="font-syne font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-5">IELTS, TOEFL<br />and PTE Support</h2>
+              <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: "#8fa3b8" }}>
+                Build the language score your target university needs with guided classes, mock exams, and detailed feedback before application season.
+              </p>
+              <button
+                onClick={() => scrollTo("#contact")}
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
+                style={{ backgroundColor: "#4a6c8f" }}
+              >
+                Start Test Prep <ArrowRight size={18} />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {studyTests.map((test, i) => {
+                const Icon = test.icon;
+                return (
+                  <div
+                    key={test.name}
+                    className="rounded-2xl p-5 flex flex-col min-h-[340px]"
+                    style={{
+                      backgroundColor: "#1e2a38",
+                      border: "1px solid rgba(255,255,255,0.07)",
+                      opacity: studyRef.inView ? 1 : 0,
+                      transform: studyRef.inView ? "translateY(0)" : "translateY(28px)",
+                      transition: `opacity 0.6s ease ${i * 120}ms, transform 0.6s ease ${i * 120}ms`,
+                    }}
+                  >
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: "rgba(217,164,65,0.12)", color: "#d9a441" }}>
+                      <Icon size={22} />
+                    </div>
+                    <div className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#8fa3b8" }}>{test.format}</div>
+                    <h3 className="font-syne font-bold text-2xl text-white mb-2">{test.name}</h3>
+                    <div className="text-sm font-semibold mb-4" style={{ color: "#d9a441" }}>{test.score}</div>
+                    <p className="text-sm leading-relaxed mb-5" style={{ color: "#b0c4d8" }}>{test.desc}</p>
+                    <ul className="mt-auto space-y-2">
+                      {test.highlights.map((item) => (
+                        <li key={item} className="flex gap-2 text-xs leading-relaxed" style={{ color: "#e8edf3" }}>
+                          <CheckCircle size={14} className="mt-0.5 flex-shrink-0" style={{ color: "#d9a441" }} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -774,8 +973,8 @@ export default function Index() {
                     style={{ backgroundColor: "#10151c", border: "1px solid rgba(255,255,255,0.1)", color: "#8fa3b8" }}
                   >
                     <option value="">Select a country...</option>
-                    {["Japan", "Australia", "Canada", "United Kingdom", "South Korea", "Germany"].map((c) => (
-                      <option key={c} value={c}>{c}</option>
+                    {countries.map((country) => (
+                      <option key={country.name} value={country.name}>{country.name}</option>
                     ))}
                   </select>
                 </div>

@@ -123,6 +123,22 @@
   animation: revealUp 0.6s ease forwards;
 }
 
+@keyframes heroImageSlide {
+  from { opacity: 0; transform: translateX(28px) scale(1.03); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+.animate-hero-image-slide {
+  animation: heroImageSlide 0.65s ease both;
+}
+
+@keyframes heroCardSlide {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-hero-card-slide {
+  animation: heroCardSlide 0.45s ease both;
+}
+
 /* Nav underline expand */
 .nav-link::after {
   content: '';
