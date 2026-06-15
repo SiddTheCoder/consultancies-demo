@@ -17,6 +17,9 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import { useConsultancyName } from "@/lib/consultancy-name";
+import FloatingContactButton from "@/components/FloatingContactButton";
+import ConsultancyProfileSection from "@/components/ConsultancyProfileSection";
 
 // ─────────────────────────────────────────────
 // Utility: useInView hook
@@ -216,10 +219,10 @@ const processSteps = [
 ];
 
 const testimonials = [
-  { name: "Priya Sharma", dest: "University of Melbourne", rating: 5, text: "Elite Global made the entire process seamless. Visa approved first attempt!", avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg", crest: "🎓" },
+  { name: "Priya Sharma", dest: "University of Melbourne", rating: 5, text: "{consultancyName} made the entire process seamless. Visa approved first attempt!", avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg", crest: "🎓" },
   { name: "Daniel Kim", dest: "Waseda University, Japan", rating: 5, text: "The documentation support was exceptional. Got a full scholarship thanks to their guidance.", avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg", crest: "🎓" },
   { name: "Sofia Mendes", dest: "University of Toronto", rating: 5, text: "Professional, responsive, and truly cared about my success. Highly recommend.", avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg", crest: "🎓" },
-  { name: "Amir Hassan", dest: "TU Munich, Germany", rating: 5, text: "Free tuition in Germany — I didn't know it was possible. Elite Global opened that door.", avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg", crest: "🎓" },
+  { name: "Amir Hassan", dest: "TU Munich, Germany", rating: 5, text: "Free tuition in Germany — I didn't know it was possible. {consultancyName} opened that door.", avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg", crest: "🎓" },
   { name: "Chen Wei", dest: "Imperial College London", rating: 5, text: "My SOP was transformed into something truly compelling. Admission offer within 3 weeks.", avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg", crest: "🎓" },
   { name: "Fatima Al-Rashid", dest: "Yonsei University, Korea", rating: 5, text: "Got the government scholarship I was eyeing. The team's connections are unparalleled.", avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg", crest: "🎓" },
   { name: "Raj Patel", dest: "University of Sydney", rating: 5, text: "Stress-free journey from application to visa grant. Couldn't have done it without them.", avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg", crest: "🎓" },
@@ -245,118 +248,10 @@ const navLinks = [
 ];
 
 // ─────────────────────────────────────────────
-// Floating Contact Button
-// ─────────────────────────────────────────────
-function FloatingContactButton() {
-  const [open, setOpen] = useState(false);
-
-  const socials = [
-    {
-      label: "Telegram",
-      href: "https://t.me/eliteglobal",
-      color: "#229ED9",
-      bg: "rgba(34,158,217,0.15)",
-      border: "rgba(34,158,217,0.35)",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" width={20} height={20}>
-          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.4 13.93l-2.95-.924c-.642-.204-.657-.642.136-.953l11.57-4.461c.534-.194 1.002.13.738.629z" />
-        </svg>
-      ),
-    },
-    {
-      label: "Facebook",
-      href: "https://facebook.com/eliteglobal",
-      color: "#1877F2",
-      bg: "rgba(24,119,242,0.15)",
-      border: "rgba(24,119,242,0.35)",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" width={20} height={20}>
-          <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047v-2.66c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.277h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" />
-        </svg>
-      ),
-    },
-    {
-      label: "WhatsApp",
-      href: "https://wa.me/18885550148",
-      color: "#25D366",
-      bg: "rgba(37,211,102,0.15)",
-      border: "rgba(37,211,102,0.35)",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" width={20} height={20}>
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
-      ),
-    },
-  ];
-
-  return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-3">
-      {/* Social buttons — revealed upward */}
-      <div className="flex flex-col items-center gap-3">
-        {socials.map((s, i) => (
-          <a
-            key={s.label}
-            href={s.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={s.label}
-            style={{
-              backgroundColor: s.bg,
-              border: `1px solid ${s.border}`,
-              color: s.color,
-              backdropFilter: "blur(12px)",
-              opacity: open ? 1 : 0,
-              transform: open ? "translateY(0) scale(1)" : "translateY(16px) scale(0.8)",
-              pointerEvents: open ? "auto" : "none",
-              transition: `opacity 0.3s ease ${open ? (2 - i) * 70 : i * 50}ms, transform 0.3s ease ${open ? (2 - i) * 70 : i * 50}ms`,
-            }}
-            className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110"
-          >
-            {s.icon}
-          </a>
-        ))}
-      </div>
-
-      {/* Main "Contact Us" trigger button */}
-      <button
-        onClick={() => setOpen((v) => !v)}
-        title="Contact Us"
-        className="w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95"
-        style={{
-          backgroundColor: "#d9a441",
-          border: "2px solid rgba(255,255,255,0.15)",
-          boxShadow: "0 4px 24px rgba(217,164,65,0.45)",
-        }}
-      >
-        <div
-          style={{
-            transition: "transform 0.3s ease",
-            transform: open ? "rotate(45deg)" : "rotate(0deg)",
-          }}
-        >
-          {open ? (
-            <X size={22} className="text-[#10151c]" />
-          ) : (
-            <MessageCircle size={22} className="text-[#10151c]" />
-          )}
-        </div>
-      </button>
-
-      {/* Label */}
-      <span
-        className="text-[10px] font-semibold tracking-wide uppercase"
-        style={{ color: "#d9a441" }}
-      >
-        Contact
-      </span>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────
 // Main Component
 // ─────────────────────────────────────────────
 export default function Index() {
+  const { consultancyName, emailAddress } = useConsultancyName();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -412,18 +307,18 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen font-jakarta" style={{ backgroundColor: "#10151c", color: "#e8edf3" }}>
+    <div className="min-h-screen font-jakarta" style={{ backgroundColor: "var(--brand-bg)", color: "var(--brand-text)" }}>
 
       {/* ── NAVBAR ── */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 lg:px-16 py-4"
-        style={{ backgroundColor: "rgba(16,21,28,0.88)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+        style={{ backgroundColor: "var(--brand-nav)", backdropFilter: "blur(16px)", borderBottom: "1px solid var(--brand-border-soft)" }}
       >
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#4a6c8f" }}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "var(--brand-primary)" }}>
             <GraduationCap size={18} className="text-white" />
           </div>
-          <span className="font-syne font-bold text-lg text-white tracking-tight">Elite<span style={{ color: "#d9a441" }}>Global</span></span>
+          <span className="font-sans font-bold text-sm md:text-[15px] text-white tracking-normal max-w-[220px] truncate">{consultancyName}</span>
         </div>
 
         {/* Desktop nav */}
@@ -443,14 +338,14 @@ export default function Index() {
           <button
             onClick={() => scrollTo("#contact")}
             className="text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200 hover:text-white"
-            style={{ color: "#d9a441", border: "1px solid rgba(217,164,65,0.3)" }}
+            style={{ color: "var(--brand-accent)", border: "1px solid rgba(217,164,65,0.3)" }}
           >
             Free Consultation
           </button>
           <button
             onClick={() => scrollTo("#contact")}
             className="text-sm font-semibold px-5 py-2 rounded-lg text-white transition-all duration-200 hover:opacity-90"
-            style={{ backgroundColor: "#4a6c8f" }}
+            style={{ backgroundColor: "var(--brand-primary)" }}
           >
             Apply Now
           </button>
@@ -466,14 +361,14 @@ export default function Index() {
       {mobileMenuOpen && (
         <div
           className="fixed inset-0 z-40 flex flex-col pt-20 px-6 pb-8 gap-4 md:hidden"
-          style={{ backgroundColor: "rgba(16,21,28,0.97)", backdropFilter: "blur(20px)" }}
+          style={{ backgroundColor: "var(--brand-mobile-menu)", backdropFilter: "blur(20px)" }}
         >
           {navLinks.map((link) => (
             <button
               key={link.href}
               onClick={() => scrollTo(link.href)}
               className="text-left text-lg font-syne font-semibold text-white py-3 border-b"
-              style={{ borderColor: "rgba(255,255,255,0.08)" }}
+              style={{ borderColor: "var(--brand-border)" }}
             >
               {link.label}
             </button>
@@ -481,7 +376,7 @@ export default function Index() {
           <button
             onClick={() => scrollTo("#contact")}
             className="mt-4 text-base font-semibold px-6 py-3 rounded-xl text-white"
-            style={{ backgroundColor: "#4a6c8f" }}
+            style={{ backgroundColor: "var(--brand-primary)" }}
           >
             Book Free Consultation
           </button>
@@ -497,7 +392,7 @@ export default function Index() {
         <div className="w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: copy */}
           <div className="space-y-6 lg:space-y-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase" style={{ backgroundColor: "rgba(74,108,143,0.2)", border: "1px solid rgba(74,108,143,0.4)", color: "#d9a441" }}>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase" style={{ backgroundColor: "rgba(74,108,143,0.2)", border: "1px solid rgba(74,108,143,0.4)", color: "var(--brand-accent)" }}>
               <span className="w-1.5 h-1.5 rounded-full bg-[#d9a441] animate-pulse" />
               Trusted by 5,000+ Students Worldwide
             </div>
@@ -505,25 +400,25 @@ export default function Index() {
             <h1 className="font-jakarta font-extrabold leading-[1.08] text-white" style={{ fontSize: "clamp(2.4rem, 5vw, 4.5rem)", letterSpacing: 0 }}>
               Your Dream<br />
               University.<br />
-              <span style={{ color: "#d9a441" }}>Our Expertise.</span>
+              <span style={{ color: "var(--brand-accent)" }}>Our Expertise.</span>
             </h1>
 
-            <p className="text-base md:text-lg leading-relaxed max-w-lg" style={{ color: "#8fa3b8" }}>
-              Elite Global connects ambitious students to top universities across 12 leading destinations, with end-to-end support from profile assessment to visa approval.
+            <p className="text-base md:text-lg leading-relaxed max-w-lg" style={{ color: "var(--brand-muted)" }}>
+              {consultancyName} connects ambitious students to top universities across 12 leading destinations, with end-to-end support from profile assessment to visa approval.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => scrollTo("#contact")}
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
-                style={{ backgroundColor: "#4a6c8f" }}
+                style={{ backgroundColor: "var(--brand-primary)" }}
               >
                 Book Free Consultation <ArrowRight size={18} />
               </button>
               <button
                 onClick={() => scrollTo("#countries")}
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-semibold transition-all duration-200 hover:text-white"
-                style={{ color: "#e8edf3", border: "1px solid rgba(255,255,255,0.15)", backgroundColor: "rgba(255,255,255,0.04)" }}
+                style={{ color: "var(--brand-text)", border: "1px solid var(--brand-border-strong)", backgroundColor: "var(--brand-button-subtle)" }}
               >
                 Explore Destinations
               </button>
@@ -532,8 +427,8 @@ export default function Index() {
             {/* Trust badges */}
             <div className="flex flex-wrap gap-4 pt-2">
               {["ICEF Certified", "British Council Partner", "ISO 9001:2015"].map((b) => (
-                <div key={b} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#8fa3b8" }}>
-                  <CheckCircle size={13} style={{ color: "#d9a441" }} />
+                <div key={b} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "var(--brand-muted)" }}>
+                  <CheckCircle size={13} style={{ color: "var(--brand-accent)" }} />
                   {b}
                 </div>
               ))}
@@ -562,7 +457,7 @@ export default function Index() {
                     className="h-1.5 rounded-full transition-all duration-300"
                     style={{
                       width: heroSlideIndex === i ? "28px" : "8px",
-                      backgroundColor: heroSlideIndex === i ? "#d9a441" : "rgba(255,255,255,0.45)",
+                      backgroundColor: heroSlideIndex === i ? "var(--brand-accent)" : "rgba(255,255,255,0.45)",
                     }}
                   />
                 ))}
@@ -571,16 +466,16 @@ export default function Index() {
 
             {/* Floating stat card */}
             <div className="absolute -left-4 md:-left-8 bottom-12 hidden sm:block transition-transform duration-300 ease-out group-hover:translate-x-5 group-hover:-translate-y-4">
-              <div key={`bottom-${heroSlideIndex}`} className="px-4 py-3 rounded-xl shadow-2xl animate-hero-card-slide" style={{ backgroundColor: "#1e2a38", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <div className="text-xl font-jakarta font-extrabold" style={{ color: "#d9a441", letterSpacing: 0 }}>{heroSlide.bottomStat.value}</div>
-                <div className="text-xs" style={{ color: "#8fa3b8" }}>{heroSlide.bottomStat.label}</div>
+              <div key={`bottom-${heroSlideIndex}`} className="px-4 py-3 rounded-xl shadow-2xl animate-hero-card-slide" style={{ backgroundColor: "var(--brand-surface)", border: "1px solid var(--brand-border)" }}>
+                <div className="text-xl font-jakarta font-extrabold" style={{ color: "var(--brand-accent)", letterSpacing: 0 }}>{heroSlide.bottomStat.value}</div>
+                <div className="text-xs" style={{ color: "var(--brand-muted)" }}>{heroSlide.bottomStat.label}</div>
               </div>
             </div>
 
             <div className="absolute -right-2 top-12 hidden sm:block transition-transform duration-300 ease-out group-hover:-translate-x-5 group-hover:translate-y-4">
-              <div key={`top-${heroSlideIndex}`} className="px-4 py-3 rounded-xl shadow-2xl animate-hero-card-slide" style={{ backgroundColor: "#1e2a38", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <div className="text-xl font-jakarta font-extrabold" style={{ color: "#d9a441", letterSpacing: 0 }}>{heroSlide.topStat.value}</div>
-                <div className="text-xs" style={{ color: "#8fa3b8" }}>{heroSlide.topStat.label}</div>
+              <div key={`top-${heroSlideIndex}`} className="px-4 py-3 rounded-xl shadow-2xl animate-hero-card-slide" style={{ backgroundColor: "var(--brand-surface)", border: "1px solid var(--brand-border)" }}>
+                <div className="text-xl font-jakarta font-extrabold" style={{ color: "var(--brand-accent)", letterSpacing: 0 }}>{heroSlide.topStat.value}</div>
+                <div className="text-xs" style={{ color: "var(--brand-muted)" }}>{heroSlide.topStat.label}</div>
               </div>
             </div>
           </div>
@@ -588,12 +483,12 @@ export default function Index() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce">
-          <ChevronDown size={20} style={{ color: "#4a6c8f" }} />
+          <ChevronDown size={20} style={{ color: "var(--brand-primary)" }} />
         </div>
       </section>
 
       {/* ── METRIC RIBBON ── */}
-      <div ref={metricsRef.ref} className="w-full py-8" style={{ backgroundColor: "#4a6c8f" }}>
+      <div ref={metricsRef.ref} className="w-full py-8" style={{ backgroundColor: "var(--brand-primary)" }}>
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-0 text-center">
           {[
             { label: "Visa Success Rate", value: visa, suffix: "%", icon: Award },
@@ -610,13 +505,15 @@ export default function Index() {
         </div>
       </div>
 
+      <ConsultancyProfileSection />
+
       {/* ── BENTO COUNTRY GRID ── */}
       <section id="countries" className="py-20 md:py-28">
         <div ref={countriesRef.ref} className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
           <div className="mb-12 md:mb-16">
-            <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#d9a441" }}>Study Destinations</div>
+            <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--brand-accent)" }}>Study Destinations</div>
             <h2 className="font-syne font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">{countries.length} World-Class<br />Destinations</h2>
-            <p className="max-w-xl text-base md:text-lg" style={{ color: "#8fa3b8" }}>Each country carefully curated for academic excellence, immigration pathways, and career outcomes.</p>
+            <p className="max-w-xl text-base md:text-lg" style={{ color: "var(--brand-muted)" }}>Each country carefully curated for academic excellence, immigration pathways, and career outcomes.</p>
           </div>
 
           {/* Bento grid */}
@@ -642,22 +539,22 @@ export default function Index() {
                 {/* Content */}
                 <div className="absolute inset-0 p-5 flex flex-col justify-between">
                   <div className="flex items-start justify-between">
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ backgroundColor: "rgba(74,108,143,0.6)", color: "#e8edf3", backdropFilter: "blur(8px)" }}>
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ backgroundColor: "rgba(74,108,143,0.6)", color: "var(--brand-text)", backdropFilter: "blur(8px)" }}>
                       {country.tag}
                     </span>
-                    <MapPin size={12} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ color: "#d9a441" }} />
+                    <MapPin size={12} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ color: "var(--brand-accent)" }} />
                   </div>
 
                   <div>
                     <h3 className="font-syne font-bold text-xl md:text-2xl text-white mb-1">{country.name}</h3>
 
                     {/* Glassmorphism facts pill */}
-                    <div className="facts-pill rounded-xl p-3 mt-2" style={{ backgroundColor: "rgba(30,42,56,0.8)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                      <div className="text-xs font-semibold mb-2" style={{ color: "#d9a441" }}>Key Facts</div>
+                    <div className="facts-pill rounded-xl p-3 mt-2" style={{ backgroundColor: "var(--brand-surface-glass)", backdropFilter: "blur(12px)", border: "1px solid var(--brand-border-strong)" }}>
+                      <div className="text-xs font-semibold mb-2" style={{ color: "var(--brand-accent)" }}>Key Facts</div>
                       <ul className="space-y-1">
                         {country.facts.map((f) => (
                           <li key={f} className="flex items-center gap-1.5 text-xs text-white/80">
-                            <span style={{ color: "#d9a441" }}>✓</span> {f}
+                            <span style={{ color: "var(--brand-accent)" }}>✓</span> {f}
                           </li>
                         ))}
                       </ul>
@@ -671,7 +568,7 @@ export default function Index() {
       </section>
 
       {/* ── STUDY TEST PREP ── */}
-      <section id="study" className="py-20 md:py-28" style={{ backgroundColor: "#0d1219" }}>
+      <section id="study" className="py-20 md:py-28" style={{ backgroundColor: "var(--brand-bg-alt)" }}>
         <div ref={studyRef.ref} className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-start">
             <div
@@ -681,15 +578,15 @@ export default function Index() {
                 transition: "opacity 0.6s ease, transform 0.6s ease",
               }}
             >
-              <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#d9a441" }}>Study Test Prep</div>
+              <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--brand-accent)" }}>Study Test Prep</div>
               <h2 className="font-syne font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-5">IELTS, TOEFL<br />and PTE Support</h2>
-              <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: "#8fa3b8" }}>
+              <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: "var(--brand-muted)" }}>
                 Build the language score your target university needs with guided classes, mock exams, and detailed feedback before application season.
               </p>
               <button
                 onClick={() => scrollTo("#contact")}
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
-                style={{ backgroundColor: "#4a6c8f" }}
+                style={{ backgroundColor: "var(--brand-primary)" }}
               >
                 Start Test Prep <ArrowRight size={18} />
               </button>
@@ -703,24 +600,24 @@ export default function Index() {
                     key={test.name}
                     className="rounded-2xl p-5 flex flex-col min-h-[340px]"
                     style={{
-                      backgroundColor: "#1e2a38",
-                      border: "1px solid rgba(255,255,255,0.07)",
+                      backgroundColor: "var(--brand-surface)",
+                      border: "1px solid var(--brand-border)",
                       opacity: studyRef.inView ? 1 : 0,
                       transform: studyRef.inView ? "translateY(0)" : "translateY(28px)",
                       transition: `opacity 0.6s ease ${i * 120}ms, transform 0.6s ease ${i * 120}ms`,
                     }}
                   >
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: "rgba(217,164,65,0.12)", color: "#d9a441" }}>
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: "rgba(217,164,65,0.12)", color: "var(--brand-accent)" }}>
                       <Icon size={22} />
                     </div>
-                    <div className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#8fa3b8" }}>{test.format}</div>
+                    <div className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "var(--brand-muted)" }}>{test.format}</div>
                     <h3 className="font-syne font-bold text-2xl text-white mb-2">{test.name}</h3>
-                    <div className="text-sm font-semibold mb-4" style={{ color: "#d9a441" }}>{test.score}</div>
-                    <p className="text-sm leading-relaxed mb-5" style={{ color: "#b0c4d8" }}>{test.desc}</p>
+                    <div className="text-sm font-semibold mb-4" style={{ color: "var(--brand-accent)" }}>{test.score}</div>
+                    <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--brand-soft)" }}>{test.desc}</p>
                     <ul className="mt-auto space-y-2">
                       {test.highlights.map((item) => (
-                        <li key={item} className="flex gap-2 text-xs leading-relaxed" style={{ color: "#e8edf3" }}>
-                          <CheckCircle size={14} className="mt-0.5 flex-shrink-0" style={{ color: "#d9a441" }} />
+                        <li key={item} className="flex gap-2 text-xs leading-relaxed" style={{ color: "var(--brand-text)" }}>
+                          <CheckCircle size={14} className="mt-0.5 flex-shrink-0" style={{ color: "var(--brand-accent)" }} />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -734,18 +631,18 @@ export default function Index() {
       </section>
 
       {/* ── PROCESS TIMELINE ── */}
-      <section id="process" className="py-20 md:py-28" style={{ backgroundColor: "#0d1219" }}>
+      <section id="process" className="py-20 md:py-28" style={{ backgroundColor: "var(--brand-bg-alt)" }}>
         <div ref={processRef.ref} className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
           <div className="mb-12 md:mb-16 text-center">
-            <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#d9a441" }}>How It Works</div>
+            <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--brand-accent)" }}>How It Works</div>
             <h2 className="font-syne font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">Your Journey,<br />Step by Step</h2>
-            <p className="max-w-xl mx-auto text-base" style={{ color: "#8fa3b8" }}>From first conversation to boarding your flight — we guide you through every milestone.</p>
+            <p className="max-w-xl mx-auto text-base" style={{ color: "var(--brand-muted)" }}>From first conversation to boarding your flight — we guide you through every milestone.</p>
           </div>
 
           {/* Stepper */}
           <div className="relative">
             {/* Central rail (desktop) */}
-            <div className="hidden lg:block absolute left-1/2 top-8 bottom-8 w-0.5 -translate-x-1/2" style={{ backgroundColor: "rgba(255,255,255,0.08)" }} />
+            <div className="hidden lg:block absolute left-1/2 top-8 bottom-8 w-0.5 -translate-x-1/2" style={{ backgroundColor: "var(--brand-border)" }} />
 
             <div className="space-y-8 lg:space-y-0">
               {processSteps.map((step, i) => {
@@ -763,15 +660,15 @@ export default function Index() {
                       <div
                         className="inline-block rounded-2xl p-5 max-w-sm w-full"
                         style={{
-                          backgroundColor: isActive ? "#1e2a38" : "rgba(30,42,56,0.4)",
-                          border: `1px solid ${isActive ? "rgba(74,108,143,0.4)" : "rgba(255,255,255,0.05)"}`,
+                          backgroundColor: isActive ? "var(--brand-surface)" : "var(--brand-surface-faint)",
+                          border: `1px solid ${isActive ? "rgba(74,108,143,0.4)" : "var(--brand-border-soft)"}`,
                           transition: "all 0.4s ease",
                         }}
                       >
-                        <div className="font-syne font-bold text-base mb-1" style={{ color: isActive ? "#d9a441" : "#8fa3b8" }}>
+                        <div className="font-syne font-bold text-base mb-1" style={{ color: isActive ? "var(--brand-accent)" : "var(--brand-muted)" }}>
                           {step.title}
                         </div>
-                        <p className="text-sm leading-relaxed" style={{ color: "#8fa3b8" }}>{step.desc}</p>
+                        <p className="text-sm leading-relaxed" style={{ color: "var(--brand-muted)" }}>{step.desc}</p>
                       </div>
                     </div>
 
@@ -780,12 +677,12 @@ export default function Index() {
                       <div
                         className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500"
                         style={{
-                          backgroundColor: isActive ? "#d9a441" : "#1e2a38",
-                          border: `2px solid ${isActive ? "#d9a441" : "rgba(255,255,255,0.1)"}`,
+                          backgroundColor: isActive ? "var(--brand-accent)" : "var(--brand-surface)",
+                          border: `2px solid ${isActive ? "var(--brand-accent)" : "var(--brand-border-strong)"}`,
                           boxShadow: isActive ? "0 0 20px rgba(217,164,65,0.4)" : "none",
                         }}
                       >
-                        <Icon size={20} style={{ color: isActive ? "#10151c" : "#4a6c8f" }} />
+                        <Icon size={20} style={{ color: isActive ? "var(--brand-bg)" : "var(--brand-primary)" }} />
                       </div>
                     </div>
 
@@ -802,7 +699,7 @@ export default function Index() {
       {/* ── TESTIMONIALS MARQUEE ── */}
       <section id="testimonials" className="py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 mb-12">
-          <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#d9a441" }}>Student Success Stories</div>
+          <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--brand-accent)" }}>Student Success Stories</div>
           <h2 className="font-syne font-bold text-3xl md:text-4xl lg:text-5xl text-white">What Our Alumni Say</h2>
         </div>
 
@@ -813,22 +710,22 @@ export default function Index() {
               <div
                 key={i}
                 className="flex-shrink-0 w-72 md:w-80 rounded-2xl p-5 flex flex-col gap-4"
-                style={{ backgroundColor: "#1e2a38", border: "1px solid rgba(255,255,255,0.07)" }}
+                style={{ backgroundColor: "var(--brand-surface)", border: "1px solid var(--brand-border)" }}
               >
                 {/* Stars */}
                 <div className="flex gap-0.5">
                   {Array(t.rating).fill(0).map((_, s) => (
-                    <Star key={s} size={13} fill="#d9a441" stroke="none" />
+                    <Star key={s} size={13} fill="var(--brand-accent)" stroke="none" />
                   ))}
                 </div>
                 {/* Quote */}
-                <p className="text-sm leading-relaxed flex-1" style={{ color: "#b0c4d8" }}>"{t.text}"</p>
+                  <p className="text-sm leading-relaxed flex-1" style={{ color: "var(--brand-soft)" }}>"{t.text.replace("{consultancyName}", consultancyName)}"</p>
                 {/* Profile */}
                 <div className="flex items-center gap-3">
-                  <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover border-2" style={{ borderColor: "#d9a441" }} />
+                  <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover border-2" style={{ borderColor: "var(--brand-accent)" }} />
                   <div>
                     <div className="text-sm font-semibold text-white">{t.name}</div>
-                    <div className="text-xs" style={{ color: "#4a6c8f" }}>{t.dest}</div>
+                    <div className="text-xs" style={{ color: "var(--brand-primary)" }}>{t.dest}</div>
                   </div>
                   <div className="ml-auto text-xl">{t.crest}</div>
                 </div>
@@ -836,16 +733,16 @@ export default function Index() {
             ))}
           </div>
           {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 pointer-events-none" style={{ background: "linear-gradient(to right, #10151c, transparent)" }} />
-          <div className="absolute right-0 top-0 bottom-0 w-24 pointer-events-none" style={{ background: "linear-gradient(to left, #10151c, transparent)" }} />
+          <div className="absolute left-0 top-0 bottom-0 w-24 pointer-events-none" style={{ background: "linear-gradient(to right, var(--brand-bg), transparent)" }} />
+          <div className="absolute right-0 top-0 bottom-0 w-24 pointer-events-none" style={{ background: "linear-gradient(to left, var(--brand-bg), transparent)" }} />
         </div>
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="py-20 md:py-28" style={{ backgroundColor: "#0d1219" }}>
+      <section id="faq" className="py-20 md:py-28" style={{ backgroundColor: "var(--brand-bg-alt)" }}>
         <div ref={faqRef.ref} className="max-w-3xl mx-auto px-4 md:px-8 lg:px-16">
           <div className="mb-12">
-            <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#d9a441" }}>FAQ</div>
+            <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--brand-accent)" }}>FAQ</div>
             <h2 className="font-syne font-bold text-3xl md:text-4xl text-white">Frequently Asked<br />Questions</h2>
           </div>
 
@@ -855,8 +752,8 @@ export default function Index() {
                 key={i}
                 className="rounded-xl overflow-hidden transition-all duration-300"
                 style={{
-                  backgroundColor: openFaq === i ? "#1e2a38" : "transparent",
-                  border: `1px solid ${openFaq === i ? "rgba(74,108,143,0.4)" : "rgba(255,255,255,0.08)"}`,
+                  backgroundColor: openFaq === i ? "var(--brand-surface)" : "transparent",
+                  border: `1px solid ${openFaq === i ? "rgba(74,108,143,0.4)" : "var(--brand-border)"}`,
                   opacity: faqRef.inView ? 1 : 0,
                   transform: faqRef.inView ? "translateY(0)" : "translateY(20px)",
                   transition: `opacity 0.5s ease ${i * 80}ms, transform 0.5s ease ${i * 80}ms, background-color 0.3s, border-color 0.3s`,
@@ -869,12 +766,12 @@ export default function Index() {
                   <span className="font-syne font-semibold text-sm md:text-base text-white">{item.q}</span>
                   <ChevronDown
                     size={18}
-                    style={{ color: "#d9a441", transition: "transform 0.3s", transform: openFaq === i ? "rotate(180deg)" : "rotate(0)" }}
+                    style={{ color: "var(--brand-accent)", transition: "transform 0.3s", transform: openFaq === i ? "rotate(180deg)" : "rotate(0)" }}
                     className="flex-shrink-0"
                   />
                 </button>
                 {openFaq === i && (
-                  <div className="px-5 pb-5 text-sm leading-relaxed" style={{ color: "#8fa3b8" }}>
+                  <div className="px-5 pb-5 text-sm leading-relaxed" style={{ color: "var(--brand-muted)" }}>
                     {item.a}
                   </div>
                 )}
@@ -896,9 +793,9 @@ export default function Index() {
                 transition: "opacity 0.6s ease, transform 0.6s ease",
               }}
             >
-              <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#d9a441" }}>Get Started Today</div>
+              <div className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--brand-accent)" }}>Get Started Today</div>
               <h2 className="font-syne font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-6">Book Your Free<br />Consultation</h2>
-              <p className="text-base leading-relaxed mb-8" style={{ color: "#8fa3b8" }}>
+              <p className="text-base leading-relaxed mb-8" style={{ color: "var(--brand-muted)" }}>
                 Schedule a no-obligation 30-minute session with one of our senior advisors. Get a personalized roadmap for your academic journey.
               </p>
 
@@ -906,17 +803,17 @@ export default function Index() {
                 {[
                   { icon: Phone, label: "+1 (888) 555-0147", sub: "Mon–Sat, 9AM–7PM" },
                   { icon: MessageCircle, label: "WhatsApp: +1 (888) 555-0148", sub: "Instant reply within 30 mins" },
-                  { icon: Globe, label: "info@eliteglobal.edu", sub: "Response within 24 hours" },
+                  { icon: Globe, label: emailAddress, sub: "Response within 24 hours" },
                 ].map((item) => {
                   const Icon = item.icon;
                   return (
                     <div key={item.label} className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(74,108,143,0.2)" }}>
-                        <Icon size={18} style={{ color: "#4a6c8f" }} />
+                        <Icon size={18} style={{ color: "var(--brand-primary)" }} />
                       </div>
                       <div>
                         <div className="text-sm font-semibold text-white">{item.label}</div>
-                        <div className="text-xs" style={{ color: "#8fa3b8" }}>{item.sub}</div>
+                        <div className="text-xs" style={{ color: "var(--brand-muted)" }}>{item.sub}</div>
                       </div>
                     </div>
                   );
@@ -928,8 +825,8 @@ export default function Index() {
             <div
               className="rounded-2xl p-6 md:p-8"
               style={{
-                backgroundColor: "#1e2a38",
-                border: "1px solid rgba(255,255,255,0.07)",
+                backgroundColor: "var(--brand-surface)",
+                border: "1px solid var(--brand-border)",
                 opacity: contactRef.inView ? 1 : 0,
                 transform: contactRef.inView ? "translateY(0)" : "translateY(24px)",
                 transition: "opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s",
@@ -939,38 +836,38 @@ export default function Index() {
               <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium mb-1.5" style={{ color: "#8fa3b8" }}>Full Name</label>
+                    <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--brand-muted)" }}>Full Name</label>
                     <input
                       type="text"
                       placeholder="John Smith"
                       className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-[#4a6c8f] outline-none focus:ring-2 transition-all"
-                      style={{ backgroundColor: "#10151c", border: "1px solid rgba(255,255,255,0.1)" }}
+                      style={{ backgroundColor: "var(--brand-bg)", border: "1px solid var(--brand-border-strong)" }}
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium mb-1.5" style={{ color: "#8fa3b8" }}>Email Address</label>
+                    <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--brand-muted)" }}>Email Address</label>
                     <input
                       type="email"
                       placeholder="john@email.com"
                       className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-[#4a6c8f] outline-none focus:ring-2 transition-all"
-                      style={{ backgroundColor: "#10151c", border: "1px solid rgba(255,255,255,0.1)" }}
+                      style={{ backgroundColor: "var(--brand-bg)", border: "1px solid var(--brand-border-strong)" }}
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium mb-1.5" style={{ color: "#8fa3b8" }}>Phone / WhatsApp</label>
+                  <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--brand-muted)" }}>Phone / WhatsApp</label>
                   <input
                     type="tel"
                     placeholder="+1 234 567 8901"
                     className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-[#4a6c8f] outline-none focus:ring-2 transition-all"
-                    style={{ backgroundColor: "#10151c", border: "1px solid rgba(255,255,255,0.1)" }}
+                    style={{ backgroundColor: "var(--brand-bg)", border: "1px solid var(--brand-border-strong)" }}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium mb-1.5" style={{ color: "#8fa3b8" }}>Preferred Destination</label>
+                  <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--brand-muted)" }}>Preferred Destination</label>
                   <select
                     className="w-full px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 transition-all appearance-none"
-                    style={{ backgroundColor: "#10151c", border: "1px solid rgba(255,255,255,0.1)", color: "#8fa3b8" }}
+                    style={{ backgroundColor: "var(--brand-bg)", border: "1px solid var(--brand-border-strong)", color: "var(--brand-muted)" }}
                   >
                     <option value="">Select a country...</option>
                     {countries.map((country) => (
@@ -979,22 +876,22 @@ export default function Index() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium mb-1.5" style={{ color: "#8fa3b8" }}>Message (Optional)</label>
+                  <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--brand-muted)" }}>Message (Optional)</label>
                   <textarea
                     rows={3}
                     placeholder="Tell us about your academic background and goals..."
                     className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-[#4a6c8f] outline-none focus:ring-2 transition-all resize-none"
-                    style={{ backgroundColor: "#10151c", border: "1px solid rgba(255,255,255,0.1)" }}
+                    style={{ backgroundColor: "var(--brand-bg)", border: "1px solid var(--brand-border-strong)" }}
                   />
                 </div>
                 <button
                   type="submit"
                   className="w-full py-4 rounded-xl font-bold text-sm text-white transition-all duration-200 hover:opacity-90 hover:scale-[1.01]"
-                  style={{ backgroundColor: "#4a6c8f" }}
+                  style={{ backgroundColor: "var(--brand-primary)" }}
                 >
                   Book Free Consultation →
                 </button>
-                <p className="text-center text-xs" style={{ color: "#4a6c8f" }}>No spam. 100% confidential. Cancel anytime.</p>
+                <p className="text-center text-xs" style={{ color: "var(--brand-primary)" }}>No spam. 100% confidential. Cancel anytime.</p>
               </form>
             </div>
           </div>
@@ -1002,20 +899,20 @@ export default function Index() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="py-10 border-t" style={{ borderColor: "rgba(255,255,255,0.07)", backgroundColor: "#0d1219" }}>
+      <footer className="py-10 border-t" style={{ borderColor: "var(--brand-border)", backgroundColor: "var(--brand-bg-alt)" }}>
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#4a6c8f" }}>
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: "var(--brand-primary)" }}>
               <GraduationCap size={15} className="text-white" />
             </div>
-            <span className="font-syne font-bold text-base text-white">Elite<span style={{ color: "#d9a441" }}>Global</span></span>
+            <span className="font-syne font-bold text-base text-white">{consultancyName}</span>
           </div>
-          <div className="flex flex-wrap justify-center gap-5 text-xs" style={{ color: "#8fa3b8" }}>
+          <div className="flex flex-wrap justify-center gap-5 text-xs" style={{ color: "var(--brand-muted)" }}>
             {["Privacy Policy", "Terms of Service", "Refund Policy", "Sitemap"].map((l) => (
               <a key={l} href="#" className="hover:text-white transition-colors">{l}</a>
             ))}
           </div>
-          <p className="text-xs text-center md:text-right" style={{ color: "#4a6c8f" }}>© 2024 Elite Global Consultancy. All rights reserved.</p>
+          <p className="text-xs text-center md:text-right" style={{ color: "var(--brand-primary)" }}>© 2024 {consultancyName}. All rights reserved.</p>
         </div>
       </footer>
 
@@ -1035,7 +932,7 @@ export default function Index() {
           style={{
             backgroundColor: "rgba(30,42,56,0.85)",
             backdropFilter: "blur(16px)",
-            border: "1px solid rgba(255,255,255,0.1)",
+            border: "1px solid var(--brand-border-strong)",
           }}
         >
           <MessageCircle size={18} style={{ color: "#25D366" }} />
@@ -1045,7 +942,7 @@ export default function Index() {
           href="tel:+18885550147"
           className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl font-bold text-sm text-white transition-all duration-200 active:scale-95"
           style={{
-            backgroundColor: "#4a6c8f",
+            backgroundColor: "var(--brand-primary)",
             backdropFilter: "blur(16px)",
           }}
         >
@@ -1057,3 +954,5 @@ export default function Index() {
     </div>
   );
 }
+
+
