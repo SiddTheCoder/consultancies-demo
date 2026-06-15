@@ -3,9 +3,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
-import { BrowserRouter, Link, Route, Routes, useParams } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { ConsultancyNameProvider, DEFAULT_CONSULTANCY_NAME, useConsultancyName } from "@/lib/consultancy-name";
 import { ThemeProvider } from "@/lib/theme";
+import { trackVisit } from "@/lib/visit-tracker";
 import ThemeToggleButton from "@/components/ThemeToggleButton";
 import Index from "./pages/Index";
 import SamplesLanding from "./pages/SamplesLanding";
@@ -14,6 +15,22 @@ import Sample2 from "../samples/sample-2/src/pages/Index";
 import Sample3 from "../samples/sample-3/src/pages/Index";
 
 const queryClient = new QueryClient();
+
+const VisitTracker = () => {
+  const location = useLocation();
+  const { consultancyKey, consultancyName } = useConsultancyName();
+
+  useEffect(() => {
+    trackVisit({
+      path: location.pathname,
+      search: location.search,
+      consultancyKey,
+      consultancyName,
+    });
+  }, [consultancyKey, consultancyName, location.pathname, location.search]);
+
+  return null;
+};
 
 const ConsultancyNameModal = () => {
   const { hasUrlConsultancyName, setConsultancyName } = useConsultancyName();
@@ -108,6 +125,7 @@ const App = () => (
           <ConsultancyNameModal />
           <ThemeToggleButton />
           <BrowserRouter basename={import.meta.env.BASE_URL}>
+            <VisitTracker />
             <Routes>
               <Route path="/" element={<SamplesLanding />} />
               <Route path="/sample-1" element={<DemoFrame title="Sample 1" className="sample-1-demo"><Index /></DemoFrame>} />
