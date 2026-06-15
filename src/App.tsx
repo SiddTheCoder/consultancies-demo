@@ -21,6 +21,7 @@ const VisitTracker = () => {
   const { consultancyKey, consultancyName } = useConsultancyName();
 
   useEffect(() => {
+    document.title = `${consultancyName} - Website Demo`;
     trackVisit({
       path: location.pathname,
       search: location.search,
